@@ -11,6 +11,13 @@ class Home extends BaseController
    
         $data['datas'] = $model->orderBy('id', 'DESC')->findAll();
         if (session()->get('logged_in')) {
+            // return view('home', $data);
+            $data['datas'] = $model
+                ->select('tbcrud.*, tbuser.firstname, tbuser.lastname')
+                ->join('tbuser', 'tbuser.id = tbcrud.user_id')
+                ->orderBy('tbcrud.id', 'DESC')
+                ->findAll();
+
             return view('home', $data);
         } else {
             return redirect()->to('/login');
@@ -32,7 +39,12 @@ class Home extends BaseController
         $save = $model->insert($data);
         if($save != false)
         {
-            $data = $model->where('id', $save)->first();
+            // $data = $model->where('id', $save)->first();
+            $data = $model
+                ->select('tbcrud.*, tbuser.firstname, tbuser.lastname')
+                ->join('tbuser', 'tbuser.id = tbcrud.user_id')
+                ->where('tbcrud.id', $save)
+                ->first();
             echo json_encode(array("status" => true , 'data' => $data));
         }
         else{
@@ -51,7 +63,12 @@ class Home extends BaseController
         $update = $model->update($id,$data);
         if($update != false)
         {
-            $data = $model->where('id', $id)->first();
+            // $data = $model->where('id', $id)->first();
+            $data = $model
+                ->select('tbcrud.*, tbuser.firstname, tbuser.lastname')
+                ->join('tbuser', 'tbuser.id = tbcrud.user_id')
+                ->where('tbcrud.id', $id)
+                ->first();
             echo json_encode(array("status" => true , 'data' => $data));
         }
         else{

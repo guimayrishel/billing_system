@@ -120,6 +120,7 @@
                     <thead>
                         <tr class="text-center">
                             <th>Name</th>
+                            <th>User Name</th>
                             <th>Time Called</th>
                             <th>Time Arrived</th>
                             <th>Status</th>
@@ -127,29 +128,39 @@
                         </tr>
                     </thead>  
                     <tbody>
-                    <?php foreach($datas as $row){ ?>
-                        <tr id="<?php echo $row['id']; ?>">
-                            <td><?php echo $row['name']; ?></td>
-                            <td>
-                                <i class="text-primary me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/></svg> </i>
-                                <?php echo !empty($row['time_called']) && $row['time_called'] !== 'none' ? date('h:i A', strtotime($row['time_called'])) : ' ';?>
-                            </td>
-                            <td>
-                                <i class="text-primary me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/></svg> </i>
-                                <?php echo !empty($row['time_arrived']) && $row['time_arrived'] !== 'none' ? date('h:i A', strtotime($row['time_arrived'])) : ' ';?>
-                            </td>
-                            <td>
-                                <?php if ($row['time_arrived'] !== NULL){ ?>
-                                    <a class="btn-success p-1 text-white" style="border-radius: 5px;"><b>Arrived</b></a>
-                                    <?php } else { ?>
-                                    <a class="btn-warning p-1 text-white" style="border-radius: 5px;"><b>Waiting</b></a>
-                                <?php } ?>
-                            </td>
-                            <td>
-                                <button data-id="<?php echo $row['id']; ?>" class="btn btn-primary btnUpdate" <?php echo !empty($row['time_arrived']) && $row['time_arrived'] !== NULL ? 'disabled' : ' ';?>>Accept</button>
-                            </td>
-                        </tr>
-                    <?php } ?>
+                        <?php foreach ($datas as $row): ?>
+                            <tr id="<?php echo($row['id']) ?>">
+                                <td><?php echo($row['name']) ?></td>
+                                <td><?php echo($row['firstname'] ?? 'Unknown') ?> <?php echo($row['lastname'] ?? '') ?></td>
+                                <td>
+                                    <i class="text-primary me-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+                                        </svg>
+                                    </i> <?php echo !empty($row['time_called']) && $row['time_called'] !== 'none' ? date('h:i A', strtotime($row['time_called'])) : 'N/A' ?>
+                                </td>
+                                <td>
+                                    <i class="text-primary me-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+                                        </svg>
+                                    </i><?php echo !empty($row['time_arrived']) && $row['time_arrived'] !== 'none' ? date('h:i A', strtotime($row['time_arrived'])) : 'N/A' ?>
+                                </td>
+                                <td>
+                                    <?php if (!empty($row['time_arrived'])): ?>
+                                        <span class="btn-success p-1 text-white" style="border-radius: 5px;"><b>Arrived</b></span>
+                                    <?php else: ?>
+                                        <span class="btn-warning p-1 text-white" style="border-radius: 5px;"><b>Waiting</b></span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <button data-id="<?php echo($row['id']) ?>" class="btn btn-primary btnUpdate" 
+                                        <?= !empty($row['time_arrived']) ? 'disabled' : '' ?>>
+                                        Accept
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -191,7 +202,7 @@
                 <form id="update" name="update" action="<?php echo base_url('/update');?>" method="post" >
                 <div class="modal-body">
                     <input type="hidden" name="id" id="id"/>
-                    <p>?</p>
+                    <p>Arrived?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -241,12 +252,13 @@
                             : 'N/A';
                             var timeArrived = (res.data.time_arrived && res.data.time_arrived !== 'none') 
                                                 ? formatTime(res.data.time_arrived) 
-                                                : ' ';
+                                                : 'N/A';
                             var acceptButton = (res.data.time_arrived && res.data.time_arrived !== 'none') 
                                                 ? '<button data-id="' + res.data.id + '" class="btn btn-primary btnUpdate" disabled>Accept</button>'
                                                 : '<button data-id="' + res.data.id + '" class="btn btn-primary btnUpdate">Accept</button>';                   
                             var crud = '<tr id="'+res.data.id+'">';
                                 crud += '<td>' + res.data.name + '</td>';
+                                crud += '<td>' + res.data.firstname + ' ' + res.data.lastname + '</td>';
                                 crud += '<td> <i class="text-primary me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/></svg></i>' + timeCalled + '</td>';
                                 crud += '<td> <i class="text-primary me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/></svg></i>' + timeArrived + '</td>';
                                 crud += '<td>'+(res.data.time_arrived && res.data.time_arrived !== 'none'
@@ -291,6 +303,7 @@
                                                 ? '<button data-id="' + res.data.id + '" class="btn btn-primary btnUpdate" disabled>Accept</button>'
                                                 : '<button data-id="' + res.data.id + '" class="btn btn-primary btnUpdate">Accept</button>';   
                             var crud = '<td>' + res.data.name + '</td>';
+                                crud += '<td>' + res.data.firstname + ' ' + res.data.lastname + '</td>';
                                 crud += '<td> <i class="text-primary me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/></svg></i>' + timeCalled + '</td>';
                                 crud += '<td> <i class="text-primary me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/></svg></i>' + timeArrived + '</td>';
                                 crud += '<td>'+(res.data.time_arrived && res.data.time_arrived !== 'none'
