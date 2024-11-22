@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <title>Billing</title>
@@ -9,21 +8,14 @@
         <meta content="" name="description">
         <script src="<?php echo base_url('/js/jquery.min.js');?>"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> -->
-
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/jquery.dataTables.min.css');?>">
         <script type="text/javascript" src="<?php echo base_url('/js/jquery.dataTables.min.js');?>"></script>
-
-
         <!-- Customized Bootstrap Stylesheet -->
         <link href="<?php echo base_url('/css/bootstrap.min.css');?>" rel="stylesheet">
-
         <!-- Template Stylesheet -->
         <link href="<?php echo base_url('/css/style.css');?>" rel="stylesheet">
-        
     </head>
-
     <body>
-
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -31,7 +23,6 @@
             </div>
         </div>
         <!-- Spinner End -->
-
         <!-- Navbar & Hero Start -->
         <div class="container-fluid nav-bar sticky-top px-4 py-2 py-lg-0 bg-primary">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -83,8 +74,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
-                    <a href="/" class="nav-item nav-link active"><b>Home</b></a>
-                    <a href="/view" class="nav-item nav-link"><b>View</b></a>
+                    <a href="<?php echo base_url('/');?>" class="nav-item nav-link active"><b>Home</b></a>
+                    <a href="<?php echo base_url('/view');?>" class="nav-item nav-link"><b>View</b></a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link" data-bs-toggle="dropdown"><b><?= session()->get('firstname'). ' '. session()->get('lastname') ?>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/></svg></b>
@@ -130,21 +121,42 @@
                     <tbody>
                         <?php foreach ($datas as $row): ?>
                             <tr id="<?php echo($row['id']) ?>">
-                                <td><?php echo($row['name']) ?></td>
+                                <td><b><?php echo($row['name']) ?></b></td>
                                 <td><?php echo($row['firstname'] ?? 'Unknown') ?> <?php echo($row['lastname'] ?? '') ?></td>
                                 <td>
                                     <i class="text-primary me-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
                                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
                                         </svg>
-                                    </i> <?php echo !empty($row['time_called']) && $row['time_called'] !== 'none' ? date('h:i A', strtotime($row['time_called'])) : 'N/A' ?>
+                                    </i> <?php 
+                                            $createdDate = date('Y-m-d', strtotime($row['created_at']));
+                                            $yesterday = date('Y-m-d', strtotime('-1 day'));
+                                            if ($createdDate === $yesterday) { 
+                                                echo '<i><b>Yesterday</b> at</i>';
+                                            } elseif ($createdDate < $yesterday) {
+                                                echo '<i>On <b>' . date('F j, Y', strtotime($row['created_at'])) . '</b> at</i>';
+                                            }
+                                        ?>
+                                    <?php echo !empty($row['time_called']) && $row['time_called'] !== 'none' ? date('h:i A', strtotime($row['time_called'])) : 'N/A' ?>
+                                    
                                 </td>
                                 <td>
                                     <i class="text-primary me-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
                                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
                                         </svg>
-                                    </i><?php echo !empty($row['time_arrived']) && $row['time_arrived'] !== 'none' ? date('h:i A', strtotime($row['time_arrived'])) : 'N/A' ?>
+                                    </i><?php 
+                                            $createdDate = date('Y-m-d', strtotime($row['created_at']));
+                                            $yesterday = date('Y-m-d', strtotime('-1 day'));
+
+                                            if ($createdDate === $yesterday && !empty($row['time_arrived'])) { 
+                                                echo '<i><b>Yesterday</b> at</i>';
+                                            } elseif ($createdDate < $yesterday && !empty($row['time_arrived'])) {
+                                                echo '<i>On <b>' . date('F j, Y', strtotime($row['created_at'])) . '</b> at</i>';
+                                            }
+                                        ?>
+
+                                    <?php echo !empty($row['time_arrived']) && $row['time_arrived'] !== 'none' ? date('h:i A', strtotime($row['time_arrived'])) : 'N/A' ?>
                                 </td>
                                 <td>
                                     <?php if (!empty($row['time_arrived'])): ?>
@@ -154,8 +166,8 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <button data-id="<?php echo($row['id']) ?>" class="btn btn-primary btnUpdate" 
-                                        <?= !empty($row['time_arrived']) ? 'disabled' : '' ?>>
+                                    <button data-id="<?php echo($row['id']) ?>" class="btn <?php if (date('Y-m-d', strtotime($row['created_at'])) < date('Y-m-d') && empty($row['time_arrived'])){echo 'btn-danger';} else {echo 'btn-primary';} ?>  btnUpdate" 
+                                        <?php if (!empty($row['time_arrived']) || date('Y-m-d', strtotime($row['created_at'])) < date('Y-m-d')) {echo 'disabled';} ?>>
                                         Accept
                                     </button>
                                 </td>

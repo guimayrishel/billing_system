@@ -82,8 +82,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
-                    <a href="/" class="nav-item nav-link"><b>Home</b></a>
-                    <a href="/view" class="nav-item nav-link active"><b>View</b></a>
+                    <a href="<?php echo base_url('/');?>" class="nav-item nav-link"><b>Home</b></a>
+                    <a href="<?php echo base_url('/view');?>" class="nav-item nav-link active"><b>View</b></a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link" data-bs-toggle="dropdown"><b><?= session()->get('firstname'). ' '. session()->get('lastname') ?>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/></svg></b>
@@ -109,77 +109,17 @@
         <!-- About Start -->
         <div class="container-fluid about pb-5">
             <div class="container pb-5">
-                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                    </svg>Add
-                </button> -->
-             
                         <div class="col-md-12 col-lg-12 col-xl-12 wow fadeInUp" data-wow-delay="0.2s" >
-                        
                         <div class="service-days p-4" >
-                       
                             <div class="row" id="data">
-                           
                         </div>
-                      
                     </div>
-                    
                 </div>
-                        
-                   
-                  
-                
-                
-                
             </div>
         </div>
         <!-- About End -->
-        <!-- add modal -->
-        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="ModalLabel">New</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <form id="add" name="add" action="<?php echo base_url('/store');?>" method="post" enctype="multipart/form-data">
-                <div class="modal-body">
-                  <div class="form-group">
-                      <label for="name">Name</label>
-                      <input class="form-control" id="name" name="name" rows="10" placeholder="Enter Name"></input>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <!-- add modal end -->
-        <!-- update modal -->
-        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel">Update</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="update" name="update" action="<?php echo base_url('/update');?>" method="post" >
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="id"/>
-                    <p>?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Yes</button>
-                </div>
-                </form>
-                </div>
-            </div>
-        </div> <!--update modal end-->
+       
+        
         <!-- Back to Top -->
         <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/></svg>
