@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Login 10</title>
+  	<title>Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -26,13 +26,13 @@
 			
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
+					<div class="login-wrap p-5 " >
 					<h3 class="mb-4 text-center">Login</h3>
 		      	<form action="<?php echo base_url('/dologin');?>" class="signin-form" method="post">
 					
 		      		<div class="form-group">
 
-		      			<input type="text" value="<?= old('username') ?>" class="form-control-auth" placeholder="Username" name="username" required>
+		      			<input <?php if(session() -> getFlashdata('error') == 'Wrong Username') :?> style="border-color: red" <?php endif; ?> type="text" value="<?= old('username') ?>" class="form-control-auth" placeholder="Username" name="username" required>
 		      		</div>
 					
 					<?php if(session() -> getFlashdata('error') == 'Wrong Username') :?>
@@ -42,7 +42,7 @@
 	            <div class="form-group py-2">
 				<!-- <label class="text-white" for="name">Password</label> -->
 
-	              <input id="password-field" value="<?= old('password') ?>" type="password" class="form-control-auth" placeholder="Password" name="password" required>
+	              <input <?php if(session() -> getFlashdata('error') == 'Wrong Password') :?> style="border-color: red" <?php endif; ?> id="password-field" value="<?= old('password') ?>" type="password" class="form-control-auth" placeholder="Password" name="password" required>
 	              <!-- <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span> -->
 	            </div>
 				

@@ -15,7 +15,7 @@
         <!-- Template Stylesheet -->
         <link href="<?php echo base_url('/css/style.css');?>" rel="stylesheet">
     </head>
-    <body>
+    <body style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('<?php echo base_url('/business-financial-investment-credit-card-600nw-2040338441.png'); ?>');">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -99,23 +99,25 @@
      <br>
         <!-- About Start -->
         <div class="container-fluid about pb-5">
-            <div class="container pb-5">
+            <div class="container pb-1">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                     </svg>Add
                 </button>
+            </div>
+            <div class="container" style="background-color: white">
                 <br>
                 <br>
                 <table class="table table-bordered table-striped" id="tabledata">
                     <thead>
-                        <tr class="text-center">
-                            <th>Name</th>
-                            <th>User Name</th>
-                            <th>Time Called</th>
-                            <th>Time Arrived</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                        <tr>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">User Name</th>
+                            <th class="text-center">Time Called</th>
+                            <th class="text-center">Time Arrived</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>  
                     <tbody>
@@ -269,7 +271,7 @@
                                                 ? '<button data-id="' + res.data.id + '" class="btn btn-primary btnUpdate" disabled>Accept</button>'
                                                 : '<button data-id="' + res.data.id + '" class="btn btn-primary btnUpdate">Accept</button>';                   
                             var crud = '<tr id="'+res.data.id+'">';
-                                crud += '<td>' + res.data.name + '</td>';
+                                crud += '<td> <b>' + res.data.name + '</b></td>';
                                 crud += '<td>' + res.data.firstname + ' ' + res.data.lastname + '</td>';
                                 crud += '<td> <i class="text-primary me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/></svg></i>' + timeCalled + '</td>';
                                 crud += '<td> <i class="text-primary me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/></svg></i>' + timeArrived + '</td>';
@@ -314,7 +316,7 @@
                             var acceptButton = (res.data.time_arrived && res.data.time_arrived !== 'none') 
                                                 ? '<button data-id="' + res.data.id + '" class="btn btn-primary btnUpdate" disabled>Accept</button>'
                                                 : '<button data-id="' + res.data.id + '" class="btn btn-primary btnUpdate">Accept</button>';   
-                            var crud = '<td>' + res.data.name + '</td>';
+                            var crud = '<td> <b>' + res.data.name + '</b></td>';
                                 crud += '<td>' + res.data.firstname + ' ' + res.data.lastname + '</td>';
                                 crud += '<td> <i class="text-primary me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/></svg></i>' + timeCalled + '</td>';
                                 crud += '<td> <i class="text-primary me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/></svg></i>' + timeArrived + '</td>';
