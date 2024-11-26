@@ -1023,7 +1023,8 @@
 
     .login-wrap {
         position: relative;
-        /* color: rgba(255, 255, 255, 0.9); */
+        background-color: rgba(42, 40, 40, 0.9);
+        border-radius: 5%;
      }
         .login-wrap h3 {
           font-weight: 300;

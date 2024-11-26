@@ -40,11 +40,7 @@ class Home extends BaseController
         if($save != false)
         {
             // $data = $model->where('id', $save)->first();
-            $data = $model
-                ->select('tbcrud.*, tbuser.firstname, tbuser.lastname')
-                ->join('tbuser', 'tbuser.id = tbcrud.user_id')
-                ->where('tbcrud.id', $save)
-                ->first();
+            $data = $model->select('tbcrud.*, tbuser.firstname, tbuser.lastname')->join('tbuser', 'tbuser.id = tbcrud.user_id')->where('tbcrud.id', $save)->first();
             echo json_encode(array("status" => true , 'data' => $data));
         }
         else{
@@ -64,11 +60,7 @@ class Home extends BaseController
         if($update != false)
         {
             // $data = $model->where('id', $id)->first();
-            $data = $model
-                ->select('tbcrud.*, tbuser.firstname, tbuser.lastname')
-                ->join('tbuser', 'tbuser.id = tbcrud.user_id')
-                ->where('tbcrud.id', $id)
-                ->first();
+            $data = $model->select('tbcrud.*, tbuser.firstname, tbuser.lastname')->join('tbuser', 'tbuser.id = tbcrud.user_id')->where('tbcrud.id', $id)->first();
             echo json_encode(array("status" => true , 'data' => $data));
         }
         else{

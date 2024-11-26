@@ -11,7 +11,11 @@
 
 <!-- Template Stylesheet -->
 <link href="<?php echo base_url('/css/style.css'); ?>" rel="stylesheet">
-
+<script src="<?php echo base_url('/js/jquery.min.js');?>"></script>
+<script src="<?php echo base_url('/js/jquery.validate.js');?>"></script>
+<script src="<?php echo base_url('/js/bootstrap.bundle.min.js');?>"></script>
+  <!-- Template Javascript -->
+  <script src="<?php echo base_url('/js/main.js');?>"></script>
 <style>
 	.darkened-image {
 		background-image:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('<?php echo base_url('/business-financial-investment-credit-card-600nw-2040338441.png'); ?>');
@@ -21,6 +25,11 @@
 
 	</head>
 	<body class="img js-fullheight darkened-image" >
+	<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <!-- <span class="sr-only">Loading...</span> -->
+            </div>
+        </div>
 	<section class="ftco-section">
 		<div class="container">
 			
