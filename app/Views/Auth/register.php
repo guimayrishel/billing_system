@@ -4,6 +4,7 @@
   	<title>Register</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="<?=base_url()?>/cvmc_logo.png" type="image/gif">
 	<!-- Customized Bootstrap Stylesheet -->
 	<link href="<?php echo base_url('/css/bootstrap.min.css'); ?>" rel="stylesheet">
 	<!-- Template Stylesheet -->

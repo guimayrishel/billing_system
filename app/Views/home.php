@@ -6,6 +6,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
+        <link rel="icon" href="<?=base_url()?>/cvmc_logo.png" type="image/gif">
         <script src="<?php echo base_url('/js/jquery.min.js');?>"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/jquery.dataTables.min.css');?>">
